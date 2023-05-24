@@ -1,4 +1,4 @@
-<h1 align="center"> mlops-data-bootcamp by DataTaks.Club - https://datatalks.club/ </h1>
+<h1 align="center"> mlops-zoomcamp by DataTaks.Club - https://datatalks.club/ </h1>
 <h2 align="center"> MLOps Course - Bootcamp </h2>
 
 ### 🔭 Objective
