@@ -1,5 +1,5 @@
 <h1 align="center"> mlops-zoomcamp by DataTaks.Club - https://datatalks.club/ </h1>
-<h2 align="center"> MLOps Course Zoomcamp </h2>
+<h2 align="center"> MLOps Zoomcamp Course </h2>
 
 ### 🔭 Objective
 - Learning practical aspects of producing ML Services from training and experimenting to model deployment and monitoring.
