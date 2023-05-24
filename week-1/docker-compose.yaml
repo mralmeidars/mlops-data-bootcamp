@@ -1,0 +1,46 @@
+version: "3"
+
+volumes:
+  minio-storage: {}
+
+networks:
+  locallake-net:
+    driver: bridge
+
+services:
+
+  minio-locallake:
+      image: minio/minio:latest
+      container_name: minio-locallake
+      hostname: locallake
+      restart: always
+      ports:
+        - "9000:9000"
+        - "9001:9001"
+      environment:
+        MINIO_ROOT_USER: minio
+        MINIO_ROOT_PASSWORD: minioadmin
+      volumes:
+        -  minio-storage:/locallake
+      command: server /locallake --console-address ":9001" --address ':9000'
+      networks:
+        - locallake-net
+
+  job-setup-minio-locallake:
+      image: minio/mc:latest
+      container_name: job-setup-minio-locallake
+      hostname: job-setup-minio-locallake
+      volumes:
+        - ./datasource:/datasource
+      entrypoint: >
+        /bin/sh -c "
+        /usr/bin/mc config host add locallake http://locallake:9000 minio minioadmin;
+        /usr/bin/mc mb locallake/mlopscamp
+        /usr/bin/mc anonymous set public locallake/mlopscamp;
+        /usr/bin/mc cp --recursive datasource/* locallake/mlopscamp;
+        exit 0;
+        "
+      depends_on:
+        - minio-locallake
+      networks:
+        - locallake-net
